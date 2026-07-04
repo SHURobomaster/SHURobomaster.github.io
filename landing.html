@@ -1,0 +1,882 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>上海大学 SRM 战队官网</title>
+  <meta name="description" content="上海大学 SRM RoboMaster 战队官网原型：战队介绍、机器人展示、赛季战绩与加入方式。">
+  <style>
+    :root {
+      --bg: #000000;
+      --surface: #000000;
+      --surface-warm: var(--surface);
+      --fg: #f0f0fa;
+      --fg-2: var(--fg);
+      --muted: rgba(240, 240, 250, 0.7);
+      --meta: var(--muted);
+      --border: rgba(240, 240, 250, 0.35);
+      --border-soft: rgba(240, 240, 250, 0.1);
+      --accent: #f0f0fa;
+      --accent-on: #000000;
+      --accent-hover: #ffffff;
+      --accent-active: #d8d8e6;
+      --success: #16a34a;
+      --warn: #eab308;
+      --danger: #dc2626;
+      --font-display: "D-DIN-Bold", "D-DIN", "DIN Alternate", "Helvetica Neue", Arial, Verdana, sans-serif;
+      --font-body: "D-DIN", "DIN Alternate", "Helvetica Neue", Arial, Verdana, sans-serif;
+      --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Monaco, Consolas, monospace;
+      --text-xs: 10px;
+      --text-sm: 12px;
+      --text-base: 16px;
+      --text-lg: 20px;
+      --text-xl: 24px;
+      --text-2xl: 32px;
+      --text-3xl: 40px;
+      --text-4xl: 48px;
+      --leading-body: 1.5;
+      --leading-tight: 1.0;
+      --tracking-display: 0.02em;
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 20px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --space-12: 48px;
+      --section-y-desktop: 120px;
+      --section-y-tablet: 80px;
+      --section-y-phone: 56px;
+      --radius-sm: 4px;
+      --radius-md: 4px;
+      --radius-lg: 4px;
+      --radius-pill: 32px;
+      --elev-flat: none;
+      --elev-ring: 0 0 0 1px var(--border);
+      --elev-raised: none;
+      --focus-ring: 0 0 0 2px var(--accent);
+      --motion-fast: 150ms;
+      --motion-base: 200ms;
+      --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+      --container-max: 1440px;
+      --container-gutter-desktop: 24px;
+      --container-gutter-tablet: 20px;
+      --container-gutter-phone: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--font-body);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      background: var(--bg);
+      color: var(--fg);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .site-nav {
+      position: fixed;
+      z-index: 20;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+      padding: 24px clamp(18px, 4vw, 56px);
+      color: var(--fg);
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.76), rgba(0, 0, 0, 0));
+    }
+
+    .brand-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 13px;
+      min-width: 0;
+      font-family: var(--font-display);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      line-height: var(--leading-tight);
+      white-space: nowrap;
+    }
+
+    .brand-copy {
+      display: grid;
+      gap: 5px;
+      min-width: 0;
+    }
+
+    .brand-mark .symbol {
+      font-family: "Arial Black", "Avenir Next Condensed", "DIN Condensed", Impact, var(--font-display);
+      font-size: clamp(25px, 3.6vw, 36px);
+      letter-spacing: 0.04em;
+    }
+
+    .brand-mark .word {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: clamp(14px, 2vw, 32px);
+      font-size: var(--text-sm);
+      font-weight: 700;
+      letter-spacing: 1.17px;
+      line-height: var(--leading-tight);
+    }
+
+    .brand-badge {
+      width: clamp(44px, 4.8vw, 64px);
+      height: clamp(44px, 4.8vw, 64px);
+      object-fit: contain;
+      opacity: 0.96;
+      filter: drop-shadow(0 0 18px rgba(240, 240, 250, 0.18));
+      flex: 0 0 auto;
+    }
+
+    .nav-links a {
+      opacity: 0.78;
+      transition: opacity var(--motion-base) var(--ease-standard);
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      opacity: 1;
+    }
+
+    .btn {
+      display: inline-flex;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      padding: 16px 22px;
+      background: rgba(240, 240, 250, 0.1);
+      color: var(--fg);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.17px;
+      text-transform: uppercase;
+      transition: background var(--motion-base) var(--ease-standard), border-color var(--motion-base) var(--ease-standard);
+    }
+
+    .btn:hover,
+    .btn:focus-visible {
+      background: rgba(240, 240, 250, 0.18);
+      border-color: var(--accent-hover);
+      outline: none;
+    }
+
+    .btn:focus-visible {
+      box-shadow: var(--focus-ring);
+    }
+
+    .scene {
+      position: relative;
+      min-height: 100svh;
+      isolation: isolate;
+      overflow: hidden;
+      display: grid;
+      align-items: end;
+      padding: clamp(96px, 14vh, 168px) clamp(18px, 5vw, 80px) clamp(46px, 8vh, 88px);
+      background: var(--bg);
+    }
+
+    .scene::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(circle at 1px 1px, rgba(240, 240, 250, 0.16) 1px, transparent 0) 0 0 / 32px 32px,
+        linear-gradient(135deg, rgba(240, 240, 250, 0.06), rgba(0, 0, 0, 0) 42%);
+      opacity: 0.58;
+    }
+
+    .scene--photo::before {
+      background-image: var(--scene-image);
+      background-size: cover;
+      background-position: var(--scene-position, center);
+      opacity: var(--scene-opacity, 0.58);
+      transform: scale(1.02);
+    }
+
+    .scene::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.48) 42%, rgba(0, 0, 0, 0.2) 100%),
+        linear-gradient(0deg, rgba(0, 0, 0, 0.82) 0%, rgba(0, 0, 0, 0) 34%);
+    }
+
+    .scene-inner {
+      width: min(100%, var(--container-max));
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .narrow {
+      width: min(760px, 100%);
+    }
+
+    .wide-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(320px, 1.08fr);
+      gap: clamp(34px, 7vw, 96px);
+      align-items: center;
+    }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.18em;
+      line-height: var(--leading-tight);
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    h1,
+    h2 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      line-height: var(--leading-tight);
+      letter-spacing: var(--tracking-display);
+      text-wrap: balance;
+    }
+
+    h1 {
+      max-width: 980px;
+      font-size: clamp(42px, 8vw, 112px);
+    }
+
+    .hero-title {
+      max-width: min(760px, 56vw);
+      display: grid;
+      gap: clamp(16px, 2.4vw, 30px);
+    }
+
+    .hero-title .hero-srm {
+      display: block;
+      font-family: "Arial Black", "Avenir Next Condensed", "DIN Condensed", Impact, var(--font-display);
+      font-size: clamp(76px, 12.4vw, 168px);
+      line-height: 0.92;
+      letter-spacing: 0.015em;
+      -webkit-text-stroke: 0.8px rgba(240, 240, 250, 0.22);
+    }
+
+    .hero-title .hero-motto {
+      display: block;
+      font-family: "Songti SC", "STSong", "Noto Serif CJK SC", "Source Han Serif SC", "PingFang SC", serif;
+      font-size: clamp(28px, 3.8vw, 56px);
+      line-height: 1.18;
+      letter-spacing: 0.07em;
+      font-weight: 900;
+    }
+
+    h2 {
+      font-size: clamp(34px, 5vw, 72px);
+    }
+
+    h3 {
+      font-family: var(--font-display);
+      font-size: clamp(18px, 2vw, 26px);
+      line-height: 1.08;
+      letter-spacing: 0.08em;
+    }
+
+    .lead {
+      max-width: 760px;
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: clamp(15px, 1.8vw, 19px);
+      line-height: 1.8;
+      text-transform: none;
+      letter-spacing: 0.04em;
+      text-wrap: pretty;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .hero-pointcloud-shell {
+      position: absolute;
+      z-index: 0;
+      top: clamp(142px, 20vh, 212px);
+      right: clamp(-240px, -8vw, -78px);
+      width: min(52vw, 780px);
+      height: min(52vh, 560px);
+      opacity: 0.82;
+      pointer-events: auto;
+      mix-blend-mode: screen;
+      mask-image: linear-gradient(90deg, transparent 0%, black 48%, black 100%);
+      isolation: isolate;
+    }
+
+    .hero-pointcloud-shell::before {
+      content: "";
+      position: absolute;
+      inset: -12% -6%;
+      z-index: -1;
+      background:
+        radial-gradient(ellipse at 58% 52%, rgba(0, 0, 0, 0.68) 0%, rgba(0, 0, 0, 0.42) 42%, rgba(0, 0, 0, 0) 72%);
+      pointer-events: none;
+    }
+
+    #hero-pointcloud {
+      position: relative;
+      z-index: 1;
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .text-rail {
+      display: grid;
+      gap: 24px;
+      max-width: 840px;
+      margin-top: 34px;
+    }
+
+    .rail-item {
+      display: grid;
+      grid-template-columns: 84px minmax(0, 1fr);
+      gap: 24px;
+      padding: 18px 0;
+      border-top: 1px solid var(--border-soft);
+    }
+
+    .rail-item .index {
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+    }
+
+    .rail-item p {
+      color: var(--muted);
+      font-size: clamp(14px, 1.6vw, 17px);
+      line-height: 1.8;
+      text-transform: none;
+      letter-spacing: 0.04em;
+    }
+
+    .groups {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: clamp(18px, 2.4vw, 32px);
+      margin-top: 44px;
+    }
+
+    .group-unit {
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 0 0 18px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .group-unit p {
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+      text-transform: none;
+      letter-spacing: 0.04em;
+    }
+
+    .group-unit .tag {
+      margin-top: 28px;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      line-height: 1.7;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: clamp(28px, 6vw, 84px);
+      align-items: end;
+      margin-top: 42px;
+    }
+
+    .scoreline {
+      display: grid;
+      gap: 18px;
+    }
+
+    .scoreline li {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 140px minmax(0, 1fr);
+      gap: 24px;
+      padding: 18px 0;
+      border-top: 1px solid var(--border-soft);
+      color: var(--muted);
+      line-height: 1.7;
+      text-transform: none;
+      letter-spacing: 0.04em;
+    }
+
+    .scoreline strong {
+      color: var(--fg);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: clamp(14px, 2vw, 24px);
+      margin-top: 44px;
+    }
+
+    .gallery-item {
+      margin: 0;
+      min-width: 0;
+      border-top: 1px solid var(--border-soft);
+      padding-top: 14px;
+    }
+
+    .gallery-item img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      filter: grayscale(0.2) contrast(1.08) brightness(0.78);
+    }
+
+    .gallery-item figcaption {
+      margin-top: 12px;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      line-height: 1.6;
+      letter-spacing: 0.12em;
+    }
+
+    .join-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(280px, 0.56fr);
+      gap: clamp(34px, 6vw, 78px);
+      align-items: start;
+      margin-top: 44px;
+    }
+
+    .join-steps {
+      display: grid;
+      gap: 18px;
+      margin-top: 30px;
+    }
+
+    .join-steps div {
+      display: grid;
+      grid-template-columns: 54px minmax(0, 1fr);
+      gap: 18px;
+      padding: 18px 0;
+      border-top: 1px solid var(--border-soft);
+    }
+
+    .join-steps b {
+      font-family: var(--font-mono);
+      color: var(--muted);
+    }
+
+    .join-steps span {
+      color: var(--muted);
+      line-height: 1.7;
+      text-transform: none;
+      letter-spacing: 0.04em;
+    }
+
+    .join-contact {
+      display: grid;
+      gap: 18px;
+      padding-top: 8px;
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-kicker,
+    .contact-status {
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.14em;
+      line-height: 1.6;
+    }
+
+    .contact-line {
+      display: inline-block;
+      color: var(--fg);
+      font-family: var(--font-display);
+      font-size: clamp(24px, 3vw, 38px);
+      line-height: 1.05;
+      letter-spacing: 0.04em;
+      overflow-wrap: anywhere;
+    }
+
+    .contact-note {
+      color: var(--muted);
+      line-height: 1.8;
+      text-transform: none;
+      letter-spacing: 0.04em;
+    }
+
+    .contact-actions {
+      display: grid;
+      gap: 14px;
+    }
+
+    .contact-status {
+      min-height: 20px;
+    }
+
+    .footer {
+      min-height: auto;
+      padding-top: 88px;
+      padding-bottom: 34px;
+      border-top: 1px solid var(--border-soft);
+    }
+
+    .footer-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 20px;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      line-height: 1.7;
+    }
+
+    @media (max-width: 1180px) {
+      .wide-grid,
+      .timeline,
+      .join-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .groups,
+      .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      .site-nav {
+        padding: 18px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .brand-mark .word {
+        display: none;
+      }
+
+      .scene {
+        min-height: 100svh;
+        padding: 92px 18px 40px;
+      }
+
+      .scene::after {
+        background:
+          linear-gradient(90deg, rgba(0, 0, 0, 0.86), rgba(0, 0, 0, 0.4)),
+          linear-gradient(0deg, rgba(0, 0, 0, 0.84), rgba(0, 0, 0, 0.05));
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .hero-title {
+        max-width: min(100%, 720px);
+      }
+
+      .hero-title .hero-srm {
+        font-size: clamp(70px, 28vw, 122px);
+      }
+
+      .hero-title .hero-motto {
+        font-size: clamp(28px, 11vw, 46px);
+        letter-spacing: 0.05em;
+      }
+
+      .hero-pointcloud-shell {
+        top: 172px;
+        right: -84vw;
+        width: 138vw;
+        height: 44vh;
+        opacity: 0.54;
+        mask-image: linear-gradient(90deg, transparent 0%, black 56%, black 100%);
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .groups,
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .rail-item,
+      .join-steps div,
+      .scoreline li {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .group-unit {
+        min-height: 210px;
+      }
+
+    }
+  </style>
+</head>
+<body>
+  <nav class="site-nav" data-od-id="site-nav" aria-label="主导航">
+    <a class="brand-mark" href="#top" data-od-id="nav-brand">
+      <img class="brand-badge" src="pics/team-badge-transparent.png" alt="SRM 队伍徽章" data-od-id="nav-badge">
+      <span class="brand-copy">
+        <span class="symbol">SRM</span>
+        <span class="word">SHANGHAI UNIVERSITY ROBOMASTER</span>
+      </span>
+    </a>
+    <div class="nav-links" data-od-id="nav-links">
+      <a href="#mission" data-od-id="nav-mission">战队</a>
+      <a href="#groups" data-od-id="nav-groups">组别</a>
+      <a href="#results" data-od-id="nav-results">战绩</a>
+      <a href="#gallery" data-od-id="nav-gallery">画廊</a>
+      <a href="#join" data-od-id="nav-join">加入</a>
+    </div>
+  </nav>
+
+  <main id="content" data-od-id="main-content">
+    <section id="top" class="scene scene--photo" data-od-id="hero-section" style="--scene-image: url('pics/team-hero.jpg'); --scene-opacity: 0.76; --scene-position: center 46%;">
+      <div class="hero-pointcloud-shell" data-od-id="hero-pointcloud-shell" aria-label="SRM 战车轮廓展示">
+        <canvas id="hero-pointcloud" data-od-id="hero-pointcloud-canvas"></canvas>
+      </div>
+      <div class="scene-inner">
+        <p class="eyebrow" data-od-id="hero-eyebrow">TEAM SRM / ROBO MASTER / SHANGHAI UNIVERSITY</p>
+        <h1 class="hero-title" data-od-id="hero-title">
+          <span class="hero-srm">SRM</span>
+          <span class="hero-motto">搏至无憾，鲨向巅峰</span>
+        </h1>
+        <p class="lead" data-od-id="hero-lead">上海大学 SRM 战队，RoboMaster 机甲大师赛上海大学官方参赛队伍。我们把机械结构、嵌入式控制、视觉算法与战队运营凝成一台能上场对抗的机器人，也把每个队员的热爱、韧性和工程能力带到赛场中央。</p>
+        <div class="hero-actions" data-od-id="hero-actions">
+          <a class="btn" href="#join" data-od-id="hero-join-button">加入我们</a>
+          <button class="btn" type="button" id="reset-pointcloud" data-od-id="hero-pointcloud-reset">重置视角</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="mission" class="scene" data-od-id="mission-section">
+      <div class="scene-inner wide-grid">
+        <div class="narrow">
+          <p class="eyebrow" data-od-id="mission-eyebrow">MISSION PROFILE</p>
+          <h2 data-od-id="mission-title">把课堂里的工程能力，推到赛场边界</h2>
+          <p class="lead" data-od-id="mission-lead">战队隶属于上海大学机电工程与自动化学院，成员来自机自、计算机、通信等学院。这里不是单一课程项目，而是一套跨学科工程系统：从底盘、云台、发射机构到算法、PCB、部署和赛事运营。</p>
+        </div>
+        <div class="text-rail" data-od-id="mission-rail">
+          <article class="rail-item" data-od-id="mission-rail-origin">
+            <span class="index">01</span>
+            <p>成立以来，SRM 培养出进入上海交通大学、同济大学、西安交通大学、华东师范大学、电子科技大学等高校深造的队员，也有毕业生进入中国商飞、复旦微电子、大疆创新、节卡机器人等企业。</p>
+          </article>
+          <article class="rail-item" data-od-id="mission-rail-belief">
+            <span class="index">02</span>
+            <p>战队坚持“自己动手改变世界”的工程信念，强调团队协作、抗挫折能力和行动不抱怨。每个赛季都以真实需求、真实 deadline、真实对抗推动成长。</p>
+          </article>
+          <article class="rail-item" data-od-id="mission-rail-value">
+            <span class="index">03</span>
+            <p>RoboMaster 让机器视觉、嵌入式系统、机械控制、惯性导航和人机交互共同进入一个高度直观的赛场。SRM 的任务，是把这些能力组织成稳定的战斗系统。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="groups" class="scene" data-od-id="groups-section">
+      <div class="scene-inner">
+        <p class="eyebrow" data-od-id="groups-eyebrow">FOUR OPERATING UNITS</p>
+        <h2 data-od-id="groups-title">四个组别，完成一台战车的闭环</h2>
+        <div class="groups" data-od-id="groups-grid">
+          <article class="group-unit" data-od-id="group-mechanical">
+            <div>
+              <h3>机械组</h3>
+              <p>设计底盘、云台、气动系统和发射机构，完成零件加工、装配、调试与维护，把图纸变成能上场的结构。</p>
+            </div>
+            <span class="tag">SOLIDWORKS / CAD / ASSEMBLY</span>
+          </article>
+          <article class="group-unit" data-od-id="group-control">
+            <div>
+              <h3>电控组</h3>
+              <p>搭建硬件电路与控制系统，设计 PCB，编写运动控制程序，并持续调试机器人在赛场中的稳定性。</p>
+            </div>
+            <span class="tag">PCB / MCU / CONTROL</span>
+          </article>
+          <article class="group-unit" data-od-id="group-vision">
+            <div>
+              <h3>视觉组</h3>
+              <p>研发目标识别、跟踪、预测与自动打击相关算法，让机器人具备感知、定位、决策和部署能力。</p>
+            </div>
+            <span class="tag">C++ / PYTHON / VISION</span>
+          </article>
+          <article class="group-unit" data-od-id="group-operation">
+            <div>
+              <h3>运营组</h3>
+              <p>负责宣传、平台运维、对外招商、后勤保障、活动组织与品牌表达，让战队持续被看见、被支持。</p>
+            </div>
+            <span class="tag">MEDIA / SPONSOR / EVENT</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="results" class="scene" data-od-id="results-section">
+      <div class="scene-inner">
+        <p class="eyebrow" data-od-id="results-eyebrow">COMPETITION RECORD</p>
+        <h2 data-od-id="results-title">此役收官，蓄势待发</h2>
+        <div class="timeline" data-od-id="results-timeline">
+          <p class="lead" data-od-id="results-lead">2026 年高校联盟赛上海站，SRM 斩获步兵对抗赛冠军、工程挑战赛二等奖，3V3 对抗赛跻身 16 强。宣讲材料同时记录了战队重返 RoboMaster 超级对抗赛、作为东部赛区 32 强前往济南比赛的赛季节点。</p>
+          <ul class="scoreline" data-od-id="results-scoreline">
+            <li data-od-id="score-infantry"><strong>RMUL 2026</strong><span>上海站步兵对抗赛冠军，决赛 2:1 战胜复旦大学星云 EGA 战队。</span></li>
+            <li data-od-id="score-engineer"><strong>ENGINEER</strong><span>上海站工程挑战赛二等奖，完成占领、装配、协作与对抗场景验证。</span></li>
+            <li data-od-id="score-3v3"><strong>3V3</strong><span>上海站 3V3 对抗赛小组出线，进入 16 强淘汰赛。</span></li>
+            <li data-od-id="score-rmuc"><strong>RMUC</strong><span>2026 赛季重返超级对抗赛，刷新 SRM 赛季阶段成绩。</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery" class="scene" data-od-id="gallery-section">
+      <div class="scene-inner">
+        <p class="eyebrow" data-od-id="gallery-eyebrow">TEAM GALLERY</p>
+        <h2 data-od-id="gallery-title">赛场、调试与队伍时刻</h2>
+        <p class="lead" data-od-id="gallery-lead">照片不再作为背景铺满页面，而是集中呈现战队的训练、比赛和协作瞬间，让页面主体保持清晰，把真实画面留给画廊。</p>
+        <div class="gallery-grid" data-od-id="gallery-grid">
+          <figure class="gallery-item" data-od-id="gallery-item-hero">
+            <img src="pics/team-hero.jpg" alt="SRM 战队合影">
+            <figcaption>TEAM / RMUL 2026</figcaption>
+          </figure>
+          <figure class="gallery-item" data-od-id="gallery-item-arena-1">
+            <img src="pics/gallery-arena-01.jpg" alt="SRM 赛场画面">
+            <figcaption>ARENA / COMPETITION</figcaption>
+          </figure>
+          <figure class="gallery-item" data-od-id="gallery-item-arena-2">
+            <img src="pics/gallery-arena-02.jpg" alt="SRM 赛场与机器人">
+            <figcaption>ROBOT / FIELD</figcaption>
+          </figure>
+          <figure class="gallery-item" data-od-id="gallery-item-prep-1">
+            <img src="pics/gallery-prep-01.jpg" alt="SRM 队员准备与调试">
+            <figcaption>PREP / DEBUG</figcaption>
+          </figure>
+          <figure class="gallery-item" data-od-id="gallery-item-prep-2">
+            <img src="pics/gallery-prep-02.jpg" alt="SRM 队员训练画面">
+            <figcaption>TRAINING / TEAMWORK</figcaption>
+          </figure>
+          <figure class="gallery-item" data-od-id="gallery-item-team-1">
+            <img src="pics/gallery-team-01.jpg" alt="SRM 队伍活动照片">
+            <figcaption>TEAM / MOMENT</figcaption>
+          </figure>
+          <figure class="gallery-item" data-od-id="gallery-item-team-2">
+            <img src="pics/gallery-team-02.jpg" alt="SRM 队伍现场照片">
+            <figcaption>FIELD / MOMENT</figcaption>
+          </figure>
+          <figure class="gallery-item" data-od-id="gallery-item-team-3">
+            <img src="pics/gallery-team-03.jpg" alt="SRM 队伍协作照片">
+            <figcaption>BUILD / COLLAB</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="join" class="scene" data-od-id="join-section">
+      <div class="scene-inner">
+        <p class="eyebrow" data-od-id="join-eyebrow">JOIN THE TEAM</p>
+        <h2 data-od-id="join-title">你的机甲梦想，SRM 助你实现</h2>
+        <div class="join-panel" data-od-id="join-panel">
+          <div>
+            <p class="lead" data-od-id="join-lead">无论你来自哪个学院，只要你热爱机器人、愿意长期投入、能够与团队协作，SRM 都有适合你的位置。先进入交流群了解方向，再选择机械、电控、视觉或运营中的一个入口。</p>
+            <div class="join-steps" data-od-id="join-steps">
+              <div data-od-id="join-step-one"><b>01</b><span>关注“上大RoboMaster”，查看最新宣讲、交流群与报名表信息。</span></div>
+              <div data-od-id="join-step-two"><b>02</b><span>根据兴趣选择组别，提前准备作品、基础技能或想解决的问题。</span></div>
+              <div data-od-id="join-step-three"><b>03</b><span>填写报名表并发送至邮箱：srm_robomaster@163.com。</span></div>
+            </div>
+          </div>
+          <aside class="join-contact" data-od-id="join-contact" aria-label="报名联系方式">
+            <p class="contact-kicker" data-od-id="join-contact-kicker">CONTACT CHANNEL</p>
+            <a class="contact-line" href="mailto:srm_robomaster@163.com" data-od-id="join-email">srm_robomaster@163.com</a>
+            <p class="contact-note" data-od-id="join-contact-note">关注“上大RoboMaster”获取招新群与报名表；报名邮件可写明意向组别、基础经历和想解决的问题。</p>
+            <div class="contact-actions" data-od-id="join-contact-actions">
+              <a class="btn" href="mailto:srm_robomaster@163.com" data-od-id="send-email">发送报名邮件</a>
+              <button class="btn" type="button" id="copy-email" data-od-id="copy-email">复制报名邮箱</button>
+            </div>
+            <p class="contact-status" id="contact-status" data-od-id="contact-status" aria-live="polite"></p>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" data-od-id="site-footer">
+    <div class="scene-inner footer-row">
+      <span data-od-id="footer-name">上海大学 SRM 战队 / 上大RoboMaster</span>
+      <span data-od-id="footer-motto">搏至无憾，鲨向巅峰</span>
+      <a href="mailto:srm_robomaster@163.com" data-od-id="footer-email">srm_robomaster@163.com</a>
+    </div>
+  </footer>
+
+  <script src="assets/srm-vehicle-pointcloud.js"></script>
+  <script src="assets/landing.js"></script>
+</body>
+</html>

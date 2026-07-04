@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="refresh" content="0; url=landing.html">
+  <title>SRM 战队官网入口</title>
+  <style>
+    :root {
+      --bg: #000000;
+      --surface: #000000;
+      --surface-warm: var(--surface);
+      --fg: #f0f0fa;
+      --fg-2: var(--fg);
+      --muted: rgba(240, 240, 250, 0.7);
+      --meta: var(--muted);
+      --border: rgba(240, 240, 250, 0.35);
+      --border-soft: rgba(240, 240, 250, 0.1);
+      --accent: #f0f0fa;
+      --accent-on: #000000;
+      --accent-hover: #ffffff;
+      --accent-active: #d8d8e6;
+      --success: #16a34a;
+      --warn: #eab308;
+      --danger: #dc2626;
+      --font-display: "D-DIN-Bold", "D-DIN", "DIN Alternate", "Helvetica Neue", Arial, Verdana, sans-serif;
+      --font-body: "D-DIN", "DIN Alternate", "Helvetica Neue", Arial, Verdana, sans-serif;
+      --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Monaco, Consolas, monospace;
+      --text-xs: 10px;
+      --text-sm: 12px;
+      --text-base: 16px;
+      --text-lg: 20px;
+      --text-xl: 24px;
+      --text-2xl: 32px;
+      --text-3xl: 40px;
+      --text-4xl: 48px;
+      --leading-body: 1.5;
+      --leading-tight: 1.0;
+      --tracking-display: 0.02em;
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 20px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --space-12: 48px;
+      --section-y-desktop: 120px;
+      --section-y-tablet: 80px;
+      --section-y-phone: 56px;
+      --radius-sm: 4px;
+      --radius-md: 4px;
+      --radius-lg: 4px;
+      --radius-pill: 32px;
+      --elev-flat: none;
+      --elev-ring: 0 0 0 1px var(--border);
+      --elev-raised: none;
+      --focus-ring: 0 0 0 2px var(--accent);
+      --motion-fast: 150ms;
+      --motion-base: 200ms;
+      --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+      --container-max: 1440px;
+      --container-gutter-desktop: 24px;
+      --container-gutter-tablet: 20px;
+      --container-gutter-phone: 18px;
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--font-body);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    main {
+      min-height: 100%;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: clamp(40px, 8vw, 88px);
+      line-height: var(--leading-tight);
+      letter-spacing: var(--tracking-display);
+    }
+
+    p {
+      max-width: 620px;
+      margin: 24px auto 0;
+      color: var(--muted);
+      line-height: 1.8;
+      text-transform: none;
+      letter-spacing: 0.04em;
+    }
+
+    a {
+      display: inline-flex;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      margin-top: 30px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      padding: 16px 22px;
+      background: rgba(240, 240, 250, 0.1);
+      color: var(--fg);
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <main data-od-id="launcher-main">
+    <section data-od-id="launcher-section">
+      <h1 data-od-id="launcher-title">SRM 战队官网</h1>
+      <p data-od-id="launcher-copy">正在进入高保真响应式官网。若没有自动跳转，请打开独立页面。</p>
+      <a href="landing.html" data-od-id="launcher-link">打开官网</a>
+    </section>
+  </main>
+</body>
+</html>
